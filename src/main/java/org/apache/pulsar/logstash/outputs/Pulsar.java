@@ -99,9 +99,6 @@ public class Pulsar implements Output {
 
     private final CountDownLatch done = new CountDownLatch(1);
 
-    private final String producerName;
-    private static final PluginConfigSpec<String> CONFIG_PRODUCER_NAME =
-            PluginConfigSpec.requiredStringSetting("producer_name");
     private final String id;
     private volatile boolean stopped;
     private final PulsarClient client;
@@ -141,7 +138,6 @@ public class Pulsar implements Output {
         serviceUrl = configuration.get(CONFIG_SERVICE_URL);
 
         topic = configuration.get(CONFIG_TOPIC);
-        producerName = configuration.get(CONFIG_PRODUCER_NAME);
         enableBatching = configuration.get(CONFIG_ENABLE_BATCHING);
         blockIfQueueFull = configuration.get(CONFIG_BLOCK_IF_QUEUE_FULL);
         compressionType = configuration.get(CONFIG_COMPRESSION_TYPE);
@@ -242,9 +238,6 @@ public class Pulsar implements Output {
                     .enableBatching(enableBatching)
                     .blockIfQueueFull(blockIfQueueFull)
                     .compressionType(getSubscriptionType());
-            if (producerName != null) {
-                producerBuilder.producerName(producerName);
-            }
             org.apache.pulsar.client.api.Producer<byte[]> producer = producerBuilder.create();
             logger.info("Create producer {} to topic {} , blockIfQueueFull is {},compressionType is {}", producer.getProducerName(),topic, blockIfQueueFull?"true":"false",compressionType);
             producerMap.put(topic,producer);
@@ -306,7 +299,6 @@ public class Pulsar implements Output {
                 CONFIG_CODEC,
                 CONFIG_SERVICE_URL,
                 CONFIG_TOPIC,
-                CONFIG_PRODUCER_NAME,
                 CONFIG_COMPRESSION_TYPE,
                 CONFIG_ENABLE_BATCHING,
                 CONFIG_BLOCK_IF_QUEUE_FULL,

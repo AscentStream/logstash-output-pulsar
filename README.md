@@ -13,24 +13,23 @@ If you require features not yet available in this plugin (including client versi
 # Pulsar Output Configuration Options
 This plugin supports these configuration options. 
 
-| Settings                          |                                  Output type                                  |   Required |
-|-----------------------------------|:-----------------------------------------------------------------------------:|-----------:|
-| serviceUrl                        |                                    string                                     |         No |
-| topic                             |                                    string                                     |        Yes |
-| producer_name                     |                                    string                                     |        Yes |
-| compression_type                  |              string, one of["NONE","LZ4","ZLIB","ZSTD","SNAPPY"]              |         No |
-| block_if_queue_full               |                             bool, default is true                             |         No |
-| enable_batching                   |                             bool, default is true                             |         No |
-| enable_tls                        |                boolean, one of [true, false]. default is false                |         No |
-| tls_trust_store_path              |                 string, required if enable_tls is set to true                 |         No |
-| tls_trust_store_password          |                           string, default is empty                            |         No |
-| enable_tls_hostname_verification  |                boolean, one of [true, false]. default is false                |         No |
-| protocols                         |                    array, ciphers list. default is TLSv1.2                    |         No |
-| allow_tls_insecure_connection     |                boolean, one of [true, false].default is false                 |         No |
-| auth_plugin_class_name            |                                    string                                     |         No |
-| ciphers                           |                              array, ciphers list                              |         No |
-| enable_token                      |                boolean, one of [true, false]. default is false                |         No |
-| auth_plugin_params_String         |                                    string                                     |         No |
+| Settings                          |                                  Output type                                  | Required |
+|-----------------------------------|:-----------------------------------------------------------------------------:|---------:|
+| serviceUrl                        |                                    string                                     |       No |
+| topic                             |                                    string                                     |      Yes |
+| compression_type                  |              string, one of["NONE","LZ4","ZLIB","ZSTD","SNAPPY"]              |       No |
+| block_if_queue_full               |                             bool, default is true                             |       No |
+| enable_batching                   |                             bool, default is true                             |       No |
+| enable_tls                        |                boolean, one of [true, false]. default is false                |       No |
+| tls_trust_store_path              |                 string, required if enable_tls is set to true                 |       No |
+| tls_trust_store_password          |                           string, default is empty                            |       No |
+| enable_tls_hostname_verification  |                boolean, one of [true, false]. default is false                |       No |
+| protocols                         |                    array, ciphers list. default is TLSv1.2                    |       No |
+| allow_tls_insecure_connection     |                boolean, one of [true, false].default is false                 |       No |
+| auth_plugin_class_name            |                                    string                                     |       No |
+| ciphers                           |                              array, ciphers list                              |       No |
+| enable_token                      |                boolean, one of [true, false]. default is false                |       No |
+| auth_plugin_params_String         |                                    string                                     |       No |
 # Example
 pulsar without tls & token 
 ```
@@ -38,7 +37,6 @@ output{
   pulsar{
     serviceUrl => "pulsar://127.0.0.1:6650"
     topic => "persistent://public/default/%{topic_name}"
-    producer_name => "%{producer_name}"
     enable_batching => true
   }
 }
@@ -49,7 +47,6 @@ output {
   pulsar{
     serviceUrl => "pulsar://localhost:6650"
     topic => "persistent://public/default/%{topic_name}"
-    producer_name => "%{producer_name}"
     enable_batching => true
     enable_token => true
     auth_plugin_class_name => "org.apache.pulsar.client.impl.auth.AuthenticationToken"
