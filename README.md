@@ -54,15 +54,36 @@ output {
   }
 }
 ```
+# Build
+1. Download and build logstash code.
+``` 
+git clone --branch v8.*.*  --single-branch  https://github.com/elastic/logstash.git
+cd logstash
+./gradlew assemble
+``` 
+See [build.gradle](build.gradle) for specific versions.
 
+2. create gradle.properties on  path logstash-input-pulsar.
+``` 
+LOGSTASH_CORE_PATH=<target_folder>/logstash-core
+``` 
+3. build.
+``` 
+./gradlew gem
+// output
+  Successfully built RubyGem
+  Name: logstash-input-pulsar
+  Version: 2.10.6.1
+  File: logstash-output-pulsar-2.10.6.1.gem
+``` 
 
 # Installation
 
-1. Get the latest zip file from release page.
-https://github.com/streamnative/logstash-output-pulsar/releases
+1. Get the latest gem file from release page.
+https://github.com/ascentstream/logstash-output-pulsar/releases
 
 2. Install this plugin using logstash preoffline command.
 
 ```
-bin/logstash-plugin install file://{PATH_TO}/logstash-output-pulsar-2.10.0.0.zip
+bin/logstash-plugin install file://{PATH_TO}/logstash-output-pulsar-2.10.6.1.gem
 ```
